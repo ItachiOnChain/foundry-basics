@@ -1,14 +1,33 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// I'm a comment!
+// SPDX-License-Identifier: MIT
 
-contract Counter {
-    uint256 public number;
+pragma solidity 0.8.19;
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
+// pragma solidity ^0.8.0;
+// pragma solidity >=0.8.0 <0.9.0;
+
+contract SimpleStorage {
+    uint256 myFavoriteNumber;
+
+    struct Person {
+        uint256 favoriteNumber;
+        string name;
+    }
+    // uint256[] public anArray;
+    Person[] public listOfPeople;
+
+    mapping(string => uint256) public nameToFavoriteNumber;
+
+    function store(uint256 _favoriteNumber) public {
+        myFavoriteNumber = _favoriteNumber;
     }
 
-    function increment() public {
-        number++;
+    function retrieve() public view returns (uint256) {
+        return myFavoriteNumber;
+    }
+
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        listOfPeople.push(Person(_favoriteNumber, _name));
+        nameToFavoriteNumber[_name] = _favoriteNumber;
     }
 }
